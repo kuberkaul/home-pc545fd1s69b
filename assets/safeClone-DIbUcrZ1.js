@@ -1,1 +1,0 @@
-import{t as e}from"./ErrorHandler-auMoC6kr.js";function t(t,n=null){if(t==null)return n;try{return structuredClone(t)}catch{try{return JSON.parse(JSON.stringify(t))}catch(r){return e(`safeClone failed`,r),n??(Array.isArray(t)?[]:{})}}}export{t};

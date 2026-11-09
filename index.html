@@ -1,65 +1,157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <!-- Encoding and Viewport -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="referrer" content="no-referrer">
-  <!-- Favicon, App Icon -->
-  <link rel="icon" type="image/png" sizes="64x64" href="./web-icons/favicon-64x64.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./web-icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./web-icons/favicon-16x16.png">
-  <link rel="icon" type="image/png" href="./favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="./loading-screen.css" />
-  <link rel="stylesheet" type="text/css" href="./theme-fonts.css" media="print" onload="this.media='all'" />
-  <!-- Lets the browser offer Dashy as a keyword search engine, for jumping to apps by alias -->
-  <link rel="search" type="application/opensearchdescription+xml" title="Dashy" href="./opensearch.xml" />
-  <!-- Default Page Title -->
-  <title>Dashy</title>
-  <script type="module" crossorigin src="./assets/index-BXvGC78Z.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-BCiCTKAo.js">
-  <link rel="modulepreload" crossorigin href="./assets/_plugin-vue_export-helper-CAHBAP5Q.js">
-  <link rel="modulepreload" crossorigin href="./assets/StoreMutations-Ca0m52v5.js">
-  <link rel="modulepreload" crossorigin href="./assets/ErrorHandler-auMoC6kr.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-D4jWBEvy.css">
-<link rel="manifest" href="./manifest.webmanifest" crossorigin="use-credentials"></head>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Home</title>
+<style>
+:root{--fg:#f2f4f8;--muted:rgba(242,244,248,.62);--glass:rgba(255,255,255,.08);--line:rgba(255,255,255,.14)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#0a0f1e;color:var(--fg);font-family:-apple-system,"SF Pro Display",Helvetica,Arial,sans-serif;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+/* sky */
+#sky{position:fixed;inset:0;background:linear-gradient(160deg,var(--c1) 0%,var(--c2) 55%,var(--c3) 100%);transition:background 8s linear;z-index:0}
+.orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:.55;mix-blend-mode:screen;z-index:0;will-change:transform}
+#o1{width:48vw;height:48vw;left:-12vw;top:-10vw;background:var(--o1);animation:drift1 38s ease-in-out infinite alternate}
+#o2{width:40vw;height:40vw;right:-10vw;bottom:-14vw;background:var(--o2);animation:drift2 46s ease-in-out infinite alternate}
+#o3{width:28vw;height:28vw;left:35vw;bottom:-8vw;background:var(--o3);animation:drift3 54s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(18vw,14vh) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-16vw,-18vh) scale(1.1)}}
+@keyframes drift3{to{transform:translate(12vw,-22vh) scale(.9)}}
+#stars{position:fixed;inset:0;z-index:0;opacity:0;transition:opacity 6s}
+#stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:twinkle var(--d) ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.15;transform:scale(.8)}to{opacity:.95;transform:scale(1.2)}}
+/* layout */
+#app{position:relative;z-index:1;height:100%;display:grid;grid-template-columns:minmax(0,46fr) minmax(0,54fr);gap:2.4vw;padding:3vh 3vw;padding-bottom:calc(3vh + env(safe-area-inset-bottom))}
+.col{display:flex;flex-direction:column;gap:2.2vh;min-height:0}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:2.2vw;-webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);box-shadow:0 1.2vh 4vh rgba(0,0,0,.28);animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(3vh)}to{opacity:1;transform:none}}
+/* clock */
+#clock{padding:3vh 3vw 2.6vh}
+.greet{font-size:2.2vw;color:var(--muted);letter-spacing:.02em}
+.time{font-size:11.5vw;font-weight:200;letter-spacing:-.04em;line-height:1;margin:.6vh 0 0;font-variant-numeric:tabular-nums;display:flex;align-items:flex-end}
+.time .side{display:flex;flex-direction:column;justify-content:flex-end;margin-left:1.4vw;padding-bottom:.9vw;letter-spacing:0;font-weight:400}
+.time .ss{font-size:3vw;color:var(--fg);opacity:.85;line-height:1}
+.time .ampm{font-size:2vw;color:var(--muted);margin-top:.5vh;line-height:1}
+.time .colon{transition:opacity .35s}
+.date{font-size:2.1vw;color:var(--muted);margin-top:1vh}
+/* weather */
+#wx{padding:2.4vh 3vw;flex:1;display:flex;flex-direction:column;justify-content:center}
+.wx-now{display:flex;align-items:center;gap:2vw}
+.wx-icon{font-size:7vw;line-height:1;filter:drop-shadow(0 .6vh 1.6vh rgba(0,0,0,.35));animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-.8vh) rotate(-3deg)}}
+.wx-temp{font-size:7.5vw;font-weight:200;letter-spacing:-.04em;line-height:1}
+.wx-desc{font-size:2vw;margin-top:.6vh}.wx-meta{font-size:1.5vw;color:var(--muted);margin-top:.3vh}
+.wx-days{display:flex;justify-content:space-between;margin-top:2.4vh;padding-top:2vh;border-top:1px solid var(--line)}
+.day{text-align:center;font-size:1.5vw;color:var(--muted)}.day .i{font-size:2.8vw;margin:.5vh 0}.day .hi{color:var(--fg);font-weight:600}.day .lo{margin-left:.5vw}
+/* tiles */
+#tiles{display:grid;grid-template-columns:1fr 1fr;gap:2.2vh}
+.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:.4vh;padding:2.2vh 2vw;min-height:14vh;border-radius:2.2vw;color:#fff;text-decoration:none;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 1.2vh 3vh rgba(0,0,0,.3);transition:transform .25s,box-shadow .25s;animation:rise .9s .36s cubic-bezier(.2,.8,.2,1) both}
+.tile:active{transform:scale(.96)}
+.tile::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 45%);animation:sheen 9s linear infinite}
+@keyframes sheen{to{transform:rotate(360deg)}}
+.tile svg{width:4.2vw;height:4.2vw;fill:#fff;filter:drop-shadow(0 .4vh 1vh rgba(0,0,0,.35))}
+.tile .t{font-size:2vw;font-weight:600;letter-spacing:.01em}.tile .s{font-size:1.3vw;opacity:.8}
+#yt{background:linear-gradient(135deg,#ff3d3d,#b3001b)}#sp{background:linear-gradient(135deg,#1ed760,#0b7a3a)}
+/* calendar */
+#cal{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column}
+#cal .hd{display:flex;justify-content:space-between;align-items:baseline;padding:2vh 2.4vw 1.2vh}
+#cal .hd b{font-size:2vw;font-weight:600}#cal .hd span{font-size:1.4vw;color:var(--muted)}
+#cal iframe{flex:1;width:100%;border:0;filter:invert(.92) hue-rotate(185deg) saturate(1.3) contrast(.95);opacity:.95;border-radius:0 0 2.2vw 2.2vw}
+#cal .fade{position:absolute;left:0;right:0;bottom:0;height:6vh;background:linear-gradient(transparent,rgba(10,15,30,.45));pointer-events:none;border-radius:0 0 2.2vw 2.2vw}
+.dim #app{filter:brightness(.72)}
+</style>
+</head>
 <body>
-  <!-- built files will be auto injected -->
-  <div id="app">
-    <!-- Loading screen, will be replaced when app loaded -->
-    <div class="loading-placeholder" id="loader">
-      <h1>Dashy</h1>
-      <p class="loading">Loading... </p>
-      <!-- Error message, only visible if app not mounted within 5 secs -->
-      <div class="catastrophic-error" id="err-wrap" style="display:none;">
-        <p class="err-l1">It looks like something's gone wrong...</p>
-        <p class="err-l2">
-          This is likely caused by the app source not being found at the current domain
-        </p>
-        <p class="err-l2">
-          If you need additional support, check the browser console then
-          <a href="https://github.com/Lissy93/dashy/blob/master/.github/SUPPORT.md">
-            raise a ticket
-          </a>
-        </p>
-      </div>
+<div id="sky"></div><div class="orb" id="o1"></div><div class="orb" id="o2"></div><div class="orb" id="o3"></div><div id="stars"></div>
+<div id="app">
+  <div class="col">
+    <div class="card" id="clock">
+      <div class="greet" id="greet">Hello</div>
+      <div class="time"><span id="hh">--</span><span class="colon" id="dot">:</span><span id="mm">--</span><span class="side"><span class="ss" id="ss">--</span><span class="ampm" id="ampm"></span></span></div>
+      <div class="date" id="date"></div>
+    </div>
+    <div class="card" id="wx"><div class="wx-desc" style="color:var(--muted)">Loading weather…</div></div>
+    <div id="tiles">
+      <a class="tile" id="yt" href="https://m.youtube.com" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+        <div class="t">YouTube</div><div class="s">Watch something</div></a>
+      <a class="tile" id="sp" href="spotify://" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm5.5 17.3a.75.75 0 0 1-1 .25c-2.8-1.7-6.4-2.1-10.6-1.1a.75.75 0 1 1-.3-1.5c4.6-1 8.5-.6 11.7 1.3.3.2.4.7.2 1zm1.5-3.3a.94.94 0 0 1-1.3.3c-3.2-2-8.2-2.6-12-1.4a.94.94 0 1 1-.5-1.8c4.4-1.3 9.8-.7 13.5 1.6.4.3.6.9.3 1.3zm.1-3.4C15.3 8.3 8.9 8.1 5.2 9.2a1.1 1.1 0 1 1-.7-2.2c4.3-1.3 11.3-1 15.8 1.6a1.1 1.1 0 0 1-1.2 2z"/></svg>
+        <div class="t">Spotify</div><div class="s">Play music</div></a>
     </div>
   </div>
-  <!-- Devices without JS enabled -->
-  <noscript>
-    <strong>Sorry, JavaScript needs to be enabled to run Dashy</strong>
-  </noscript>
+  <div class="col">
+    <div class="card" id="cal">
+      <div class="hd"><b>This week</b><span id="week"></span></div>
+      <iframe id="calframe" scrolling="no" title="Calendar"></iframe>
+      <div class="fade"></div>
+    </div>
+  </div>
+</div>
+<script>
+// ---- settings ----
+var CAL_ID='en.usa#holiday@group.v.calendar.google.com'; // replace with your sister's Google Calendar ID
+var TZ='America/Los_Angeles', LAT=37.7749, LON=-122.4194;
+var DIM_FROM=22, DIM_TO=6; // dim screen between these hours
 
-  <!-- Show error message if app not mounted within reasonable time frame -->
-  <script>
-    setTimeout(() => {
-      const loaderElem = document.getElementById('loader');
-      if (loaderElem) loaderElem.classList.add('still-not-loaded');
-    }, 7500);
-  </script>
+// ---- calendar ----
+document.getElementById('calframe').src='https://calendar.google.com/calendar/embed?src='+encodeURIComponent(CAL_ID)
+ +'&mode=WEEK&showTitle=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&showNav=0&showDate=0&wkst=1&bgcolor=%23ffffff&ctz='+encodeURIComponent(TZ);
 
-  <!-- Vite entry point -->
+// ---- clock, greeting, sky ----
+var SKY={ // hour -> [c1,c2,c3,o1,o2,o3]
+ night:['#070b1a','#0d1530','#141b3d','#2b3a8f','#4b1f7a','#0e6b7a'],
+ dawn:['#1b1f4a','#6d3b7a','#e07a5f','#ff9a76','#7f5aa6','#f4c27a'],
+ day:['#1e5aa8','#3d8be0','#9bd1ff','#7fd3ff','#ffd27f','#9ef0c8'],
+ dusk:['#2a2256','#8a3b6b','#f28c5e','#ff7b54','#9a5bb5','#ffb86b']};
+function mix(a,b,t){var p=function(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]},x=p(a),y=p(b);return'rgb('+x.map(function(v,i){return Math.round(v+(y[i]-v)*t)}).join(',')+')'}
+function palette(h){ // smooth blend by hour (fractional)
+ var k=[[0,'night'],[5,'night'],[7,'dawn'],[10,'day'],[16,'day'],[19,'dusk'],[21,'night'],[24,'night']];
+ for(var i=0;i<k.length-1;i++) if(h>=k[i][0]&&h<k[i+1][0]){var t=(h-k[i][0])/(k[i+1][0]-k[i][0]);return SKY[k[i][1]].map(function(c,j){return mix(c,SKY[k[i+1][1]][j],t)})}
+ return SKY.night}
+function fmt(d,o){return new Intl.DateTimeFormat('en-US',Object.assign({timeZone:TZ},o)).format(d)}
+var lastHour=-1;
+function tick(){
+ var d=new Date();
+ var h=+fmt(d,{hour:'numeric',hour12:false}).replace(/^24$/,'0'), m=fmt(d,{minute:'2-digit'}), s=fmt(d,{second:'2-digit'});
+ var h12=((h+11)%12)+1;
+ document.getElementById('hh').textContent=h12;document.getElementById('mm').textContent=m;
+ document.getElementById('ss').textContent=s;
+ document.getElementById('ampm').textContent=h<12?'AM':'PM';
+ document.getElementById('dot').style.opacity=(d.getSeconds()%2)?.25:1;
+ if(h!==lastHour){ lastHour=h;
+  document.getElementById('date').textContent=fmt(d,{weekday:'long',month:'long',day:'numeric'});
+  document.getElementById('greet').textContent=h<5?'Good night':h<12?'Good morning':h<17?'Good afternoon':h<22?'Good evening':'Good night';
+  var wkEnd=new Date(d);wkEnd.setDate(d.getDate()+6);
+  document.getElementById('week').textContent=fmt(d,{month:'short',day:'numeric'})+' – '+fmt(wkEnd,{month:'short',day:'numeric'});
+  var dim=(h>=DIM_FROM||h<DIM_TO);document.body.classList.toggle('dim',dim);
+ }
+ var p=palette(h+d.getMinutes()/60),r=document.documentElement.style;
+ ['--c1','--c2','--c3','--o1','--o2','--o3'].forEach(function(v,i){r.setProperty(v,p[i])});
+ document.getElementById('stars').style.opacity=(h>=20||h<6)?1:0;
+}
+(function stars(){var w=document.getElementById('stars'),f='';for(var i=0;i<90;i++)f+='<i style="left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--d:'+(2+Math.random()*4)+'s;animation-delay:-'+Math.random()*5+'s;width:'+(1+Math.random()*2)+'px;height:'+(1+Math.random()*2)+'px"></i>';w.innerHTML=f})();
+tick();setInterval(tick,1000);
+
+// ---- weather (Open-Meteo, no key) ----
+var W={0:['☀️','Clear'],1:['🌤\ufe0f','Mostly clear'],2:['⛅','Partly cloudy'],3:['☁️','Overcast'],45:['🌫\ufe0f','Fog'],48:['🌫\ufe0f','Fog'],51:['🌦\ufe0f','Light drizzle'],53:['🌦\ufe0f','Drizzle'],55:['🌧\ufe0f','Heavy drizzle'],61:['🌧\ufe0f','Light rain'],63:['🌧\ufe0f','Rain'],65:['🌧\ufe0f','Heavy rain'],66:['🌧\ufe0f','Freezing rain'],67:['🌧\ufe0f','Freezing rain'],71:['🌨\ufe0f','Light snow'],73:['🌨\ufe0f','Snow'],75:['❄️','Heavy snow'],77:['🌨\ufe0f','Snow grains'],80:['🌦\ufe0f','Showers'],81:['🌧\ufe0f','Showers'],82:['⛈\ufe0f','Heavy showers'],85:['🌨\ufe0f','Snow showers'],86:['❄️','Snow showers'],95:['⛈\ufe0f','Thunderstorm'],96:['⛈\ufe0f','Thunderstorm'],99:['⛈\ufe0f','Thunderstorm']};
+function wx(c,night){var x=W[c]||['🌡\ufe0f','—'];if(night&&(c===0||c===1))return['🌙',x[1]];return x}
+function weather(){
+ var u='https://api.open-meteo.com/v1/forecast?latitude='+LAT+'&longitude='+LON+'&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m,is_day&daily=temperature_2m_max,temperature_2m_min,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone='+encodeURIComponent(TZ)+'&forecast_days=5';
+ fetch(u).then(function(r){return r.json()}).then(function(d){
+  var c=d.current,x=wx(c.weather_code,!c.is_day),h='';
+  h+='<div class="wx-now"><div class="wx-icon">'+x[0]+'</div><div><div class="wx-temp">'+Math.round(c.temperature_2m)+'°</div><div class="wx-desc">'+x[1]+' in San Francisco</div><div class="wx-meta">H '+Math.round(d.daily.temperature_2m_max[0])+'° · L '+Math.round(d.daily.temperature_2m_min[0])+'° · Wind '+Math.round(c.wind_speed_10m)+' mph · Humidity '+c.relative_humidity_2m+'%</div></div></div><div class="wx-days">';
+  for(var i=1;i<d.daily.time.length;i++){var dt=new Date(d.daily.time[i]+'T12:00:00'),y=wx(d.daily.weather_code[i]);
+   h+='<div class="day"><div>'+dt.toLocaleDateString('en-US',{weekday:'short'})+'</div><div class="i">'+y[0]+'</div><span class="hi">'+Math.round(d.daily.temperature_2m_max[i])+'°</span><span class="lo">'+Math.round(d.daily.temperature_2m_min[i])+'°</span></div>'}
+  document.getElementById('wx').innerHTML=h+'</div>';
+ }).catch(function(){document.getElementById('wx').innerHTML='<div class="wx-desc" style="color:var(--muted)">Weather unavailable</div>'});
+}
+weather();setInterval(weather,15*60*1000);
+// reload nightly so the calendar embed never goes stale
+setInterval(function(){var h=new Date().getHours();if(h===4)location.reload()},60*60*1000);
+</script>
 </body>
 </html>
