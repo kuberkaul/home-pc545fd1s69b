@@ -1,0 +1,29 @@
+name: Sync calendar
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: sync-calendar
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch calendar feed
+        env:
+          CAL_ICS_URL: ${{ secrets.CAL_ICS_URL }}
+        run: |
+          if [ -z "$CAL_ICS_URL" ]; then echo "CAL_ICS_URL secret not set; keeping existing calendar.ics"; exit 0; fi
+          url="${CAL_ICS_URL/webcal:\/\//https://}"
+          curl -sfL --max-time 60 -A "Mozilla/5.0 (calendar-sync)" "$url" -o /tmp/cal.ics
+          grep -q "BEGIN:VCALENDAR" /tmp/cal.ics || { echo "feed did not return a calendar"; exit 1; }
+          # strip volatile DTSTAMP lines so unchanged calendars don't produce commits
+          sed '/^DTSTAMP:/d' /tmp/cal.ics > calendar.ics
+      - name: Commit if changed
+        run: |
+          git add calendar.ics
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git -c user.name=calendar-sync -c user.email=actions@github.com commit -m "Update calendar feed"
+          git push

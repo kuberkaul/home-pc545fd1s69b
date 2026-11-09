@@ -23,8 +23,10 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0a0f1e;color:var(--fg
 #stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:twinkle var(--d) ease-in-out infinite alternate}
 @keyframes twinkle{from{opacity:.15;transform:scale(.8)}to{opacity:.95;transform:scale(1.2)}}
 /* layout */
-#app{position:relative;z-index:1;height:100%;display:grid;grid-template-columns:minmax(0,46fr) minmax(0,54fr);gap:2.4vw;padding:3vh 3vw;padding-bottom:calc(3vh + env(safe-area-inset-bottom))}
-.col{display:flex;flex-direction:column;gap:2.2vh;min-height:0}
+#app{position:relative;z-index:1;height:100%;height:-webkit-fill-available;display:grid;grid-template-columns:minmax(0,46fr) minmax(0,54fr);gap:2.4vw;padding:2.6vh 3vw;padding-bottom:calc(2.6vh + env(safe-area-inset-bottom));overflow:hidden}
+body{height:-webkit-fill-available}
+.col{display:flex;flex-direction:column;gap:2vh;min-height:0;overflow:hidden}
+#clock,#tiles{flex:0 0 auto}
 .card{background:var(--glass);border:1px solid var(--line);border-radius:2.2vw;-webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);box-shadow:0 1.2vh 4vh rgba(0,0,0,.28);animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
 .card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.24s}
 @keyframes rise{from{opacity:0;transform:translateY(3vh)}to{opacity:1;transform:none}}
@@ -38,7 +40,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0a0f1e;color:var(--fg
 .time .colon{transition:opacity .35s}
 .date{font-size:2.1vw;color:var(--muted);margin-top:1vh}
 /* weather */
-#wx{padding:2.4vh 3vw;flex:1;display:flex;flex-direction:column;justify-content:center}
+#wx{padding:2vh 3vw;flex:1 1 0;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
 .wx-now{display:flex;align-items:center;gap:2vw}
 .wx-icon{font-size:7vw;line-height:1;filter:drop-shadow(0 .6vh 1.6vh rgba(0,0,0,.35));animation:bob 5s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(-.8vh) rotate(-3deg)}}
@@ -47,8 +49,8 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0a0f1e;color:var(--fg
 .wx-days{display:flex;justify-content:space-between;margin-top:2.4vh;padding-top:2vh;border-top:1px solid var(--line)}
 .day{text-align:center;font-size:1.5vw;color:var(--muted)}.day .i{font-size:2.8vw;margin:.5vh 0}.day .hi{color:var(--fg);font-weight:600}.day .lo{margin-left:.5vw}
 /* tiles */
-#tiles{display:grid;grid-template-columns:1fr 1fr;gap:2.2vh}
-.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:.4vh;padding:2.2vh 2vw;min-height:14vh;border-radius:2.2vw;color:#fff;text-decoration:none;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 1.2vh 3vh rgba(0,0,0,.3);transition:transform .25s,box-shadow .25s;animation:rise .9s .36s cubic-bezier(.2,.8,.2,1) both}
+#tiles{display:grid;grid-template-columns:1fr 1fr;gap:2vh}
+.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:.4vh;padding:2.2vh 2vw;min-height:12vh;border-radius:2.2vw;color:#fff;text-decoration:none;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 1.2vh 3vh rgba(0,0,0,.3);transition:transform .25s,box-shadow .25s;animation:rise .9s .36s cubic-bezier(.2,.8,.2,1) both}
 .tile:active{transform:scale(.96)}
 .tile::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 45%);animation:sheen 9s linear infinite}
 @keyframes sheen{to{transform:rotate(360deg)}}
@@ -59,8 +61,32 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0a0f1e;color:var(--fg
 #cal{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column}
 #cal .hd{display:flex;justify-content:space-between;align-items:baseline;padding:2vh 2.4vw 1.2vh}
 #cal .hd b{font-size:2vw;font-weight:600}#cal .hd span{font-size:1.4vw;color:var(--muted)}
-#cal iframe{flex:1;width:100%;border:0;filter:invert(.92) hue-rotate(185deg) saturate(1.3) contrast(.95);opacity:.95;border-radius:0 0 2.2vw 2.2vw}
-#cal .fade{position:absolute;left:0;right:0;bottom:0;height:6vh;background:linear-gradient(transparent,rgba(10,15,30,.45));pointer-events:none;border-radius:0 0 2.2vw 2.2vw}
+#days{flex:1;min-height:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.6vw;padding:0 1.4vw 1.6vh}
+.dcol{display:flex;flex-direction:column;min-height:0;border-radius:1.2vw;padding:.8vh .5vw;background:rgba(255,255,255,.04)}
+.dcol.today{background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.dcol .dn{font-size:1.25vw;color:var(--muted);text-align:center;letter-spacing:.08em;text-transform:uppercase}
+.dcol .dd{font-size:2.6vw;font-weight:300;text-align:center;line-height:1.15;margin-bottom:.8vh}
+.dcol.today .dd{font-weight:600}
+.evs{display:flex;flex-direction:column;gap:.5vh;min-height:0;overflow:hidden}
+.ev{background:rgba(255,255,255,.16);border-left:.3vw solid rgba(255,255,255,.7);border-radius:.6vw;padding:.5vh .5vw;font-size:1.15vw;line-height:1.25;overflow:hidden}
+.ev .et{display:block;font-size:.95vw;color:var(--muted);font-variant-numeric:tabular-nums}
+.ev .es{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:500;word-break:break-word}
+.ev.allday{background:rgba(255,214,120,.22);border-left-color:#ffd678}
+.ev.now{background:rgba(120,220,160,.25);border-left-color:#7fe0a0}
+.more{font-size:1vw;color:var(--muted);text-align:center;margin-top:.3vh}
+.empty{font-size:1vw;color:var(--muted);text-align:center;margin-top:1vh;opacity:.6}
+#cal .hd .sync{font-size:1.1vw}
+/* portrait: stack everything */
+@media (orientation:portrait){
+ #app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:2vh;padding:2vh 4vw}
+ .col:first-child{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:2vh}
+ #clock{grid-column:1}#wx{grid-column:2;grid-row:1}#tiles{grid-column:1/-1}
+ .time{font-size:12vw}.greet,.date{font-size:3vw}.time .ss{font-size:3.6vw}.time .ampm{font-size:2.6vw}
+ .wx-icon{font-size:9vw}.wx-temp{font-size:9vw}.wx-desc{font-size:2.6vw}.wx-meta{font-size:1.9vw}.day{font-size:1.9vw}.day .i{font-size:3.4vw}
+ .tile{min-height:11vh}.tile .t{font-size:2.8vw}.tile .s{font-size:1.8vw}.tile svg{width:5.5vw;height:5.5vw}
+ #cal .hd b{font-size:2.8vw}#cal .hd span{font-size:1.9vw}
+ .dcol .dn{font-size:1.7vw}.dcol .dd{font-size:3.6vw}.ev{font-size:1.65vw}.ev .et{font-size:1.35vw}.more,.empty{font-size:1.5vw}
+}
 .dim #app{filter:brightness(.72)}
 </style>
 </head>
@@ -85,21 +111,61 @@ html,body{margin:0;height:100%;overflow:hidden;background:#0a0f1e;color:var(--fg
   </div>
   <div class="col">
     <div class="card" id="cal">
-      <div class="hd"><b>This week</b><span id="week"></span></div>
-      <iframe id="calframe" scrolling="no" title="Calendar"></iframe>
-      <div class="fade"></div>
+      <div class="hd"><b>Next 7 days</b><span id="week"></span></div>
+      <div id="days"></div>
     </div>
   </div>
 </div>
+<script src="./vendor/ical.min.js"></script>
 <script>
 // ---- settings ----
-var CAL_ID='en.usa#holiday@group.v.calendar.google.com'; // replace with your sister's Google Calendar ID
+var CAL_FILE='./calendar.ics'; // synced every 20 min by .github/workflows/sync-calendar.yml from the CAL_ICS_URL secret
+var MAX_EVENTS=5; // per day before "+N more"
 var TZ='America/Los_Angeles', LAT=37.7749, LON=-122.4194;
 var DIM_FROM=22, DIM_TO=6; // dim screen between these hours
 
-// ---- calendar ----
-document.getElementById('calframe').src='https://calendar.google.com/calendar/embed?src='+encodeURIComponent(CAL_ID)
- +'&mode=WEEK&showTitle=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&showNav=0&showDate=0&wkst=1&bgcolor=%23ffffff&ctz='+encodeURIComponent(TZ);
+// ---- calendar (ICS file in this repo, rendered as a 7-day view) ----
+function ymd(d){return fmt(d,{year:'numeric',month:'2-digit',day:'2-digit'})} // local date key in TZ
+function dayStart(d){var p=ymd(d).split('/');return new Date(p[2]+'-'+p[0]+'-'+p[1]+'T00:00:00')}
+function esc(t){return String(t).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function renderCal(events){
+ var now=new Date(),days=[],i,h='';
+ for(i=0;i<7;i++){var d=new Date(now);d.setDate(now.getDate()+i);days.push({key:ymd(d),date:d,evs:[]})}
+ events.forEach(function(e){days.forEach(function(d){
+  if(e.allDay){ if(e.dayKeys.indexOf(d.key)>=0) d.evs.push(e) }
+  else if(ymd(e.start)===d.key) d.evs.push(e) })});
+ days.forEach(function(d,i){
+  d.evs.sort(function(a,b){return (a.allDay?-1:a.start-0)-(b.allDay?-1:b.start-0)});
+  h+='<div class="dcol'+(i===0?' today':'')+'"><div class="dn">'+(i===0?'Today':i===1?'Tmrw':fmt(d.date,{weekday:'short'}))+'</div><div class="dd">'+fmt(d.date,{day:'numeric'})+'</div><div class="evs">';
+  if(!d.evs.length) h+='<div class="empty">—</div>';
+  d.evs.slice(0,MAX_EVENTS).forEach(function(e){
+   var live=!e.allDay&&e.start<=now&&e.end>now;
+   h+='<div class="ev'+(e.allDay?' allday':'')+(live?' now':'')+'">'+(e.allDay?'':'<span class="et">'+fmt(e.start,{hour:'numeric',minute:'2-digit'}).replace(/:00/,'').replace(' ','').toLowerCase()+'</span>')+'<span class="es">'+esc(e.title)+'</span></div>'});
+  if(d.evs.length>MAX_EVENTS) h+='<div class="more">+'+(d.evs.length-MAX_EVENTS)+' more</div>';
+  h+='</div></div>'});
+ document.getElementById('days').innerHTML=h;
+}
+function loadCal(){
+ fetch(CAL_FILE+'?t='+Date.now()).then(function(r){return r.text()}).then(function(txt){
+  var comp=new ICAL.Component(ICAL.parse(txt)),out=[];
+  var from=new Date();from.setDate(from.getDate()-1);var to=new Date();to.setDate(to.getDate()+8);
+  comp.getAllSubcomponents('vevent').forEach(function(v){
+   var ev=new ICAL.Event(v); if(!ev.startDate) return;
+   function push(st,en){ var s=st.toJSDate(),e=en?en.toJSDate():new Date(s.getTime()+3600000);
+    if(e<from||s>to) return;
+    var allDay=st.isDate, keys=[];
+    if(allDay){ // key by the plain calendar date, independent of any time zone
+     var nd=en?Math.max(1,Math.round((Date.UTC(en.year,en.month-1,en.day)-Date.UTC(st.year,st.month-1,st.day))/86400000)):1;
+     for(var k=0;k<nd;k++){var u=new Date(Date.UTC(st.year,st.month-1,st.day+k));keys.push(('0'+(u.getUTCMonth()+1)).slice(-2)+'/'+('0'+u.getUTCDate()).slice(-2)+'/'+u.getUTCFullYear())}}
+    out.push({title:ev.summary||'(untitled)',start:s,end:e,allDay:allDay,dayKeys:keys}) }
+   if(ev.isRecurring()){ var it=ev.iterator(),n,c=0; while((n=it.next())&&c++<2000){ var d=n.toJSDate(); if(d>to) break; if(d<from&&!ev.duration) continue; var occ=ev.getOccurrenceDetails(n); push(occ.startDate,occ.endDate) } }
+   else push(ev.startDate,ev.endDate);
+  });
+  // drop duplicates created by RECURRENCE-ID overrides (keep the override)
+  renderCal(out);
+ }).catch(function(e){document.getElementById('days').innerHTML='<div class="empty" style="grid-column:1/-1">Calendar unavailable</div>'});
+}
+loadCal();setInterval(loadCal,10*60*1000);
 
 // ---- clock, greeting, sky ----
 var SKY={ // hour -> [c1,c2,c3,o1,o2,o3]
