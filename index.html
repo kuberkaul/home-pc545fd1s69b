@@ -72,11 +72,11 @@ body{height:-webkit-fill-available}
 .dcol .dd{font-size:2.6vw;font-weight:300;text-align:center;line-height:1.15;margin-bottom:.8vh}
 .dcol.today .dd{font-weight:600}
 .evs{display:flex;flex-direction:column;gap:.5vh;min-height:0;overflow:hidden}
-.ev{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s,background .2s;background:var(--chip);border-left:.3vw solid var(--chipline);border-radius:.6vw;padding:.5vh .5vw;font-size:1.15vw;line-height:1.25;overflow:hidden}
+.ev{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s,background .2s;background:var(--chip);border-left:.3vw solid var(--c,var(--chipline));border-radius:.6vw;padding:.5vh .5vw;font-size:1.15vw;line-height:1.25;overflow:hidden}
 .ev .et{display:block;font-size:.95vw;color:var(--muted);font-variant-numeric:tabular-nums}
 .ev .es{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:500;word-break:break-word}
-.ev.allday{background:rgba(255,190,70,.28);border-left-color:#f0a820}
-.ev.now{background:rgba(60,200,120,.28);border-left-color:#2fbf72}
+.ev.allday{background:var(--chip)}
+.ev.now{box-shadow:inset 0 0 0 1px var(--c,var(--chipline))}
 .ev:active{transform:scale(.95)}
 .more{font-size:1vw;color:var(--muted);text-align:center;margin-top:.3vh;cursor:pointer;padding:.4vh 0}
 /* event sheet */
@@ -99,7 +99,10 @@ body.light #sheet .box{background:rgba(255,255,255,.9)}
 #sheet .close{display:block;margin:22px auto 0;padding:10px 26px;border-radius:30px;border:0;background:var(--fg);color:var(--bgc,#0a0f1e);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
 body.light #sheet .close{color:#fff}
 .empty{font-size:1vw;color:var(--muted);text-align:center;margin-top:1vh;opacity:.6}
-#cal .hd .sync{font-size:1.1vw}
+#cal .hd .legend{display:flex;gap:1.2vw;font-size:1.1vw;color:var(--muted);flex-wrap:wrap;justify-content:flex-end}
+#cal .hd .legend i{display:inline-block;width:.8vw;height:.8vw;border-radius:50%;margin-right:.4vw;vertical-align:middle;background:var(--c)}
+@media (orientation:portrait){#cal .hd .legend{font-size:1.6vw}#cal .hd .legend i{width:1.2vw;height:1.2vw}}
+#sheet .who{display:inline-block;font-size:14px;padding:3px 10px;border-radius:12px;margin-bottom:10px;color:#fff;background:var(--c,#888)}
 /* portrait: stack everything */
 @media (orientation:portrait){
  #app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:2vh;padding:2vh 4vw}
@@ -144,7 +147,7 @@ body:not(.light) #mode button.on{color:#0a0f1e}
   </div>
   <div class="col">
     <div class="card" id="cal">
-      <div class="hd"><b>Next 7 days</b><span id="week"></span></div>
+      <div class="hd"><b>Next 7 days</b><span id="week"></span><span class="legend" id="legend"></span></div>
       <div id="days"></div>
     </div>
   </div>
@@ -154,7 +157,7 @@ body:not(.light) #mode button.on{color:#0a0f1e}
 <script src="./vendor/ical.min.js"></script>
 <script>
 // ---- settings ----
-var CAL_FILE='./calendar.ics'; // synced every 20 min by .github/workflows/sync-calendar.yml from the CAL_ICS_URL secret
+var CAL_INDEX='./calendars/index.json'; // feeds synced every 20 min by .github/workflows/sync-calendar.yml from the CAL_FEEDS secret
 var MAX_EVENTS=5; // per day before "+N more"
 var TZ='America/Los_Angeles', LAT=37.7749, LON=-122.4194;
 var DIM_FROM=22, DIM_TO=6; // dim screen between these hours
@@ -176,28 +179,32 @@ function renderCal(events){
   if(!d.evs.length) h+='<div class="empty">—</div>';
   d.evs.slice(0,MAX_EVENTS).forEach(function(e){
    var live=!e.allDay&&e.start<=now&&e.end>now; EVS.push(e);
-   h+='<div data-ev="'+(EVS.length-1)+'" class="ev'+(e.allDay?' allday':'')+(live?' now':'')+'">'+(e.allDay?'':'<span class="et">'+fmt(e.start,{hour:'numeric',minute:'2-digit'}).replace(/:00/,'').replace(' ','').toLowerCase()+'</span>')+'<span class="es">'+esc(e.title)+'</span></div>'});
+   h+='<div data-ev="'+(EVS.length-1)+'" class="ev'+(e.allDay?' allday':'')+(live?' now':'')+'" style="--c:'+e.color+'">'+(e.allDay?'':'<span class="et">'+fmt(e.start,{hour:'numeric',minute:'2-digit'}).replace(/:00/,'').replace(' ','').toLowerCase()+'</span>')+'<span class="es">'+esc(e.title)+'</span></div>'});
   if(d.evs.length>MAX_EVENTS){DAYS.push(d);h+='<div class="more" data-day="'+(DAYS.length-1)+'">+'+(d.evs.length-MAX_EVENTS)+' more</div>'}
   h+='</div></div>'});
  document.getElementById('days').innerHTML=h;
 }
-function loadCal(){
- fetch(CAL_FILE+'?t='+Date.now()).then(function(r){return r.text()}).then(function(txt){
-  var comp=new ICAL.Component(ICAL.parse(txt)),out=[];
-  var from=new Date();from.setDate(from.getDate()-1);var to=new Date();to.setDate(to.getDate()+8);
+function parseFeed(txt,cal,from,to,out){
+  var comp=new ICAL.Component(ICAL.parse(txt));
   comp.getAllSubcomponents('vevent').forEach(function(v){
    var ev=new ICAL.Event(v); if(!ev.startDate) return;
    function push(st,en){ var s=st.toJSDate(),e=en?en.toJSDate():new Date(s.getTime()+3600000);
     if(e<from||s>to) return;
     var allDay=st.isDate, keys=[];
-    if(allDay){ // key by the plain calendar date, independent of any time zone
-     var nd=en?Math.max(1,Math.round((Date.UTC(en.year,en.month-1,en.day)-Date.UTC(st.year,st.month-1,st.day))/86400000)):1;
+    if(allDay){ var nd=en?Math.max(1,Math.round((Date.UTC(en.year,en.month-1,en.day)-Date.UTC(st.year,st.month-1,st.day))/86400000)):1;
      for(var k=0;k<nd;k++){var u=new Date(Date.UTC(st.year,st.month-1,st.day+k));keys.push(('0'+(u.getUTCMonth()+1)).slice(-2)+'/'+('0'+u.getUTCDate()).slice(-2)+'/'+u.getUTCFullYear())}}
-    out.push({title:ev.summary||'(untitled)',start:s,end:e,allDay:allDay,dayKeys:keys,loc:ev.location||'',notes:ev.description||''}) }
+    out.push({title:ev.summary||'(untitled)',start:s,end:e,allDay:allDay,dayKeys:keys,loc:ev.location||'',notes:ev.description||'',cal:cal.name,color:cal.color}) }
    if(ev.isRecurring()){ var it=ev.iterator(),n,c=0; while((n=it.next())&&c++<2000){ var d=n.toJSDate(); if(d>to) break; if(d<from&&!ev.duration) continue; var occ=ev.getOccurrenceDetails(n); push(occ.startDate,occ.endDate) } }
    else push(ev.startDate,ev.endDate);
   });
-  // drop duplicates created by RECURRENCE-ID overrides (keep the override)
+}
+function loadCal(){
+ var from=new Date();from.setDate(from.getDate()-1);var to=new Date();to.setDate(to.getDate()+8);
+ fetch(CAL_INDEX+'?t='+Date.now()).then(function(r){return r.json()}).then(function(cals){
+  document.getElementById('legend').innerHTML=cals.length>1?cals.map(function(c){return '<span style="--c:'+c.color+'"><i></i>'+esc(c.name)+'</span>'}).join(''):'';
+  return Promise.all(cals.map(function(c){return fetch('./calendars/'+c.file+'?t='+Date.now()).then(function(r){return r.text()}).then(function(t){return {cal:c,txt:t}}).catch(function(){return null})}))
+ }).then(function(feeds){
+  var out=[]; feeds.forEach(function(f){ if(!f) return; try{parseFeed(f.txt,f.cal,from,to,out)}catch(e){console.warn('bad feed',f.cal.name,e)} });
   renderCal(out);
  }).catch(function(e){document.getElementById('days').innerHTML='<div class="empty" style="grid-column:1/-1">Calendar unavailable</div>'});
 }
@@ -212,7 +219,7 @@ function openSheet(html){document.getElementById('sheetbox').innerHTML=html+'<bu
 function closeSheet(){document.getElementById('sheet').classList.remove('open')}
 function showEvent(e){
  var dateLine=e.allDay?fmt(new Date(Date.UTC(+e.dayKeys[0].slice(6),+e.dayKeys[0].slice(0,2)-1,+e.dayKeys[0].slice(3,5),12)),{weekday:'long',month:'long',day:'numeric'}):'';
- var h='<h2>'+esc(e.title)+'</h2><div class="when">'+(dateLine?dateLine+' · ':'')+whenText(e)+'</div>';
+ var h=(e.cal?'<span class="who" style="--c:'+e.color+'">'+esc(e.cal)+'</span>':'')+'<h2>'+esc(e.title)+'</h2><div class="when">'+(dateLine?dateLine+' · ':'')+whenText(e)+'</div>';
  if(e.loc) h+='<div class="row"><b>📍</b><div>'+linkify(e.loc)+'</div></div>';
  if(e.notes) h+='<div class="row"><b>📝</b><div class="notes">'+linkify(e.notes)+'</div></div>';
  openSheet(h)}

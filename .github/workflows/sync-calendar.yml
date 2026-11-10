@@ -1,4 +1,4 @@
-name: Sync calendar
+name: Sync calendars
 on:
   schedule:
     - cron: "*/20 * * * *"
@@ -11,19 +11,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch calendar feed
+      - name: Fetch calendar feeds
         env:
-          CAL_ICS_URL: ${{ secrets.CAL_ICS_URL }}
+          # One feed per line:  Name|color|url     (webcal:// or https://, Google secret iCal or iCloud public link)
+          CAL_FEEDS: ${{ secrets.CAL_FEEDS }}
         run: |
-          if [ -z "$CAL_ICS_URL" ]; then echo "CAL_ICS_URL secret not set; keeping existing calendar.ics"; exit 0; fi
-          url="${CAL_ICS_URL/webcal:\/\//https://}"
-          curl -sfL --max-time 60 -A "Mozilla/5.0 (calendar-sync)" "$url" -o /tmp/cal.ics
-          grep -q "BEGIN:VCALENDAR" /tmp/cal.ics || { echo "feed did not return a calendar"; exit 1; }
-          # strip volatile DTSTAMP lines so unchanged calendars don't produce commits
-          sed '/^DTSTAMP:/d' /tmp/cal.ics > calendar.ics
+          if [ -z "$CAL_FEEDS" ]; then echo "CAL_FEEDS secret not set; keeping existing calendars/"; exit 0; fi
+          mkdir -p calendars; rm -f calendars/*.ics
+          echo "[" > calendars/index.json; first=1
+          while IFS='|' read -r name color url; do
+            [ -z "$url" ] && continue
+            name="$(echo "$name" | xargs)"; color="$(echo "$color" | xargs)"; url="$(echo "$url" | xargs)"
+            slug="$(echo "$name" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/^-//;s/-$//')"
+            https="${url/webcal:\/\//https://}"
+            if curl -sfL --max-time 60 -A "Mozilla/5.0 (calendar-sync)" "$https" -o /tmp/feed.ics && grep -q "BEGIN:VCALENDAR" /tmp/feed.ics; then
+              sed '/^DTSTAMP:/d' /tmp/feed.ics > "calendars/$slug.ics"
+              [ $first = 1 ] || echo "," >> calendars/index.json; first=0
+              printf '  {"name": "%s", "color": "%s", "file": "%s.ics"}' "$name" "$color" "$slug" >> calendars/index.json
+              echo "ok: $name -> $slug.ics ($(grep -c BEGIN:VEVENT calendars/$slug.ics) events)"
+            else
+              echo "::warning::could not fetch feed for $name"
+            fi
+          done <<< "$CAL_FEEDS"
+          echo "" >> calendars/index.json; echo "]" >> calendars/index.json
+          cat calendars/index.json
       - name: Commit if changed
         run: |
-          git add calendar.ics
+          git add -A calendars
           git diff --cached --quiet && { echo "no change"; exit 0; }
-          git -c user.name=calendar-sync -c user.email=actions@github.com commit -m "Update calendar feed"
+          git -c user.name=calendar-sync -c user.email=actions@github.com commit -m "Update calendar feeds"
           git push
