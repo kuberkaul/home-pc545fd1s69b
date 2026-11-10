@@ -1,3 +1,5 @@
 [
-  {"name": "Holidays", "color": "#f0a820", "file": "holidays.ics"}
+  {"name": "Suneesh", "color": "#4fb3ff", "file": "suneesh.ics"},
+  {"name": "Roma", "color": "#ff7eb6", "file": "roma.ics"},
+  {"name": "Holidays", "color": "#c9a24a", "file": "holidays.ics"}
 ]
