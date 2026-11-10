@@ -41,13 +41,14 @@ body{height:-webkit-fill-available}
 .date{font-size:2.1vw;color:var(--muted);margin-top:1vh}
 /* weather */
 #wx{padding:2vh 3vw;flex:1 1 0;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
-.wx-now{display:flex;align-items:center;gap:2vw}
-.wx-icon{font-size:7vw;line-height:1;filter:drop-shadow(0 .6vh 1.6vh rgba(0,0,0,.35));animation:bob 5s ease-in-out infinite}
+.wxin{--wxs:1;font-size:calc(1vw * var(--wxs));display:flex;flex-direction:column}
+.wx-now{display:flex;align-items:center;gap:2em}
+.wx-icon{font-size:7em;line-height:1;filter:drop-shadow(0 .6vh 1.6vh rgba(0,0,0,.35));animation:bob 5s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(-.8vh) rotate(-3deg)}}
-.wx-temp{font-size:7.5vw;font-weight:200;letter-spacing:-.04em;line-height:1}
-.wx-desc{font-size:2vw;margin-top:.6vh}.wx-meta{font-size:1.5vw;color:var(--muted);margin-top:.3vh}
-.wx-days{display:flex;justify-content:space-between;margin-top:2.4vh;padding-top:2vh;border-top:1px solid var(--line)}
-.day{text-align:center;font-size:1.5vw;color:var(--muted)}.day .i{font-size:2.8vw;margin:.5vh 0}.day .hi{color:var(--fg);font-weight:600}.day .lo{margin-left:.5vw}
+.wx-temp{font-size:7.5em;font-weight:200;letter-spacing:-.04em;line-height:1}
+.wx-desc{font-size:2em;margin-top:.3em}.wx-meta{font-size:1.5em;color:var(--muted);margin-top:.2em;white-space:nowrap}
+.wx-days{display:flex;justify-content:space-between;margin-top:1.6em;padding-top:1.3em;border-top:1px solid var(--line)}
+.day{text-align:center;font-size:1.5em;color:var(--muted)}.day .i{font-size:1.9em;margin:.2em 0}.day .hi{color:var(--fg);font-weight:600}.day .lo{margin-left:.3em}
 /* tiles */
 #tiles{display:grid;grid-template-columns:1fr 1fr;gap:2vh}
 .tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:.4vh;padding:2.2vh 2vw;min-height:12vh;border-radius:2.2vw;color:#fff;text-decoration:none;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 1.2vh 3vh rgba(0,0,0,.3);transition:transform .25s,box-shadow .25s;animation:rise .9s .36s cubic-bezier(.2,.8,.2,1) both}
@@ -56,7 +57,7 @@ body{height:-webkit-fill-available}
 @keyframes sheen{to{transform:rotate(360deg)}}
 .tile svg{width:4.2vw;height:4.2vw;fill:#fff;filter:drop-shadow(0 .4vh 1vh rgba(0,0,0,.35))}
 .tile .t{font-size:2vw;font-weight:600;letter-spacing:.01em}.tile .s{font-size:1.3vw;opacity:.8}
-#yt{background:linear-gradient(135deg,#ff3d3d,#b3001b)}#sp{background:linear-gradient(135deg,#1ed760,#0b7a3a)}
+#yt{background:linear-gradient(135deg,#ff3d3d,#b3001b)}#ym{background:linear-gradient(135deg,#ff6a3d,#8e1a3a)}
 /* calendar */
 #cal{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column}
 #cal .hd{display:flex;justify-content:space-between;align-items:baseline;padding:2vh 2.4vw 1.2vh}
@@ -82,7 +83,7 @@ body{height:-webkit-fill-available}
  .col:first-child{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:2vh}
  #clock{grid-column:1}#wx{grid-column:2;grid-row:1}#tiles{grid-column:1/-1}
  .time{font-size:12vw}.greet,.date{font-size:3vw}.time .ss{font-size:3.6vw}.time .ampm{font-size:2.6vw}
- .wx-icon{font-size:9vw}.wx-temp{font-size:9vw}.wx-desc{font-size:2.6vw}.wx-meta{font-size:1.9vw}.day{font-size:1.9vw}.day .i{font-size:3.4vw}
+ .wxin{font-size:calc(1.3vw * var(--wxs))}
  .tile{min-height:11vh}.tile .t{font-size:2.8vw}.tile .s{font-size:1.8vw}.tile svg{width:5.5vw;height:5.5vw}
  #cal .hd b{font-size:2.8vw}#cal .hd span{font-size:1.9vw}
  .dcol .dn{font-size:1.7vw}.dcol .dd{font-size:3.6vw}.ev{font-size:1.65vw}.ev .et{font-size:1.35vw}.more,.empty{font-size:1.5vw}
@@ -99,14 +100,14 @@ body{height:-webkit-fill-available}
       <div class="time"><span id="hh">--</span><span class="colon" id="dot">:</span><span id="mm">--</span><span class="side"><span class="ss" id="ss">--</span><span class="ampm" id="ampm"></span></span></div>
       <div class="date" id="date"></div>
     </div>
-    <div class="card" id="wx"><div class="wx-desc" style="color:var(--muted)">Loading weather…</div></div>
+    <div class="card" id="wx"><div class="wxin"><div class="wx-desc" style="color:var(--muted)">Loading weather…</div></div></div>
     <div id="tiles">
       <a class="tile" id="yt" href="https://www.youtube.com/?app=desktop" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
         <div class="t">YouTube</div><div class="s">Watch something</div></a>
-      <a class="tile" id="sp" href="https://open.spotify.com" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm5.5 17.3a.75.75 0 0 1-1 .25c-2.8-1.7-6.4-2.1-10.6-1.1a.75.75 0 1 1-.3-1.5c4.6-1 8.5-.6 11.7 1.3.3.2.4.7.2 1zm1.5-3.3a.94.94 0 0 1-1.3.3c-3.2-2-8.2-2.6-12-1.4a.94.94 0 1 1-.5-1.8c4.4-1.3 9.8-.7 13.5 1.6.4.3.6.9.3 1.3zm.1-3.4C15.3 8.3 8.9 8.1 5.2 9.2a1.1 1.1 0 1 1-.7-2.2c4.3-1.3 11.3-1 15.8 1.6a1.1 1.1 0 0 1-1.2 2z"/></svg>
-        <div class="t">Spotify</div><div class="s">Web player</div></a>
+      <a class="tile" id="ym" href="https://music.youtube.com" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm0 4.8a7.2 7.2 0 1 1 0 14.4 7.2 7.2 0 0 1 0-14.4zm0 1.6a5.6 5.6 0 1 0 0 11.2 5.6 5.6 0 0 0 0-11.2zM9.8 8.6l5.8 3.4-5.8 3.4V8.6z"/></svg>
+        <div class="t">YouTube Music</div><div class="s">Play music</div></a>
     </div>
   </div>
   <div class="col">
@@ -182,7 +183,8 @@ function fmt(d,o){return new Intl.DateTimeFormat('en-US',Object.assign({timeZone
 var lastHour=-1;
 function tick(){
  var d=new Date();
- var h=+fmt(d,{hour:'numeric',hour12:false}).replace(/^24$/,'0'), m=fmt(d,{minute:'2-digit'}), s=fmt(d,{second:'2-digit'});
+ var parts={};new Intl.DateTimeFormat('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(d).forEach(function(x){parts[x.type]=x.value});
+ var h=+parts.hour%24, m=('0'+parts.minute).slice(-2), s=('0'+parts.second).slice(-2);
  var h12=((h+11)%12)+1;
  document.getElementById('hh').textContent=h12;document.getElementById('mm').textContent=m;
  document.getElementById('ss').textContent=s;
@@ -209,12 +211,23 @@ function weather(){
  var u='https://api.open-meteo.com/v1/forecast?latitude='+LAT+'&longitude='+LON+'&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m,is_day&daily=temperature_2m_max,temperature_2m_min,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone='+encodeURIComponent(TZ)+'&forecast_days=5';
  fetch(u).then(function(r){return r.json()}).then(function(d){
   var c=d.current,x=wx(c.weather_code,!c.is_day),h='';
-  h+='<div class="wx-now"><div class="wx-icon">'+x[0]+'</div><div><div class="wx-temp">'+Math.round(c.temperature_2m)+'°</div><div class="wx-desc">'+x[1]+' in San Francisco</div><div class="wx-meta">H '+Math.round(d.daily.temperature_2m_max[0])+'° · L '+Math.round(d.daily.temperature_2m_min[0])+'° · Wind '+Math.round(c.wind_speed_10m)+' mph · Humidity '+c.relative_humidity_2m+'%</div></div></div><div class="wx-days">';
+  h+='<div class="wx-now"><div class="wx-icon">'+x[0]+'</div><div><div class="wx-temp">'+Math.round(c.temperature_2m)+'°</div><div class="wx-desc">'+x[1]+' · San Francisco</div><div class="wx-meta">H '+Math.round(d.daily.temperature_2m_max[0])+'° L '+Math.round(d.daily.temperature_2m_min[0])+'° · '+Math.round(c.wind_speed_10m)+' mph · '+c.relative_humidity_2m+'%</div></div></div><div class="wx-days">';
   for(var i=1;i<d.daily.time.length;i++){var dt=new Date(d.daily.time[i]+'T12:00:00'),y=wx(d.daily.weather_code[i]);
    h+='<div class="day"><div>'+dt.toLocaleDateString('en-US',{weekday:'short'})+'</div><div class="i">'+y[0]+'</div><span class="hi">'+Math.round(d.daily.temperature_2m_max[i])+'°</span><span class="lo">'+Math.round(d.daily.temperature_2m_min[i])+'°</span></div>'}
-  document.getElementById('wx').innerHTML=h+'</div>';
- }).catch(function(){document.getElementById('wx').innerHTML='<div class="wx-desc" style="color:var(--muted)">Weather unavailable</div>'});
+  document.querySelector('#wx .wxin').innerHTML=h+'</div>'; fitWx(); setTimeout(fitWx,400); setTimeout(fitWx,2000);
+ }).catch(function(){document.querySelector('#wx .wxin').innerHTML='<div class="wx-desc" style="color:var(--muted)">Weather unavailable</div>'});
 }
+// shrink the weather contents until they fit the card (runs after load, on resize and rotation)
+function fitWx(){var card=document.getElementById('wx'),inner=card.querySelector('.wxin'),cs=getComputedStyle(card);
+ inner.style.setProperty('--wxs',1);
+ var availH=card.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),availW=card.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+ var needH=inner.scrollHeight,needW=inner.scrollWidth;
+ var sc=Math.min(1,availH/needH,availW/needW)*0.97;
+ if(window.FIT_DEBUG)console.log('fitWx t='+Math.round(performance.now())+' cardH='+card.clientHeight+' availH='+availH+' needH='+needH+' availW='+availW+' needW='+needW+' sc='+sc);
+ inner.style.setProperty('--wxs',Math.max(.45,sc).toFixed(3))}
+window.FIT_DEBUG=/debug/.test(location.search);var fitT;function fitSoon(){clearTimeout(fitT);fitT=setTimeout(fitWx,120)}
+window.addEventListener('resize',fitSoon);window.addEventListener('orientationchange',fitSoon);
+if(window.ResizeObserver){new ResizeObserver(fitSoon).observe(document.getElementById('wx'))}
 weather();setInterval(weather,15*60*1000);
 // reload nightly so the calendar embed never goes stale
 setInterval(function(){var h=new Date().getHours();if(h===4)location.reload()},60*60*1000);
