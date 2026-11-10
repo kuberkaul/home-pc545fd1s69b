@@ -28,6 +28,9 @@ body.light #stars{display:none}
 /* layout */
 #app{position:relative;z-index:1;height:100%;height:-webkit-fill-available;display:grid;grid-template-columns:minmax(0,46fr) minmax(0,54fr);grid-template-rows:minmax(0,1fr);gap:2.4vw;padding:2.6vh 3vw;padding-top:calc(2.6vh + env(safe-area-inset-top));padding-bottom:calc(2.6vh + env(safe-area-inset-bottom));padding-left:calc(3vw + env(safe-area-inset-left));padding-right:calc(3vw + env(safe-area-inset-right));overflow:hidden}
 body{height:-webkit-fill-available}
+/* Home Screen web app: iPadOS draws its status bar over the page and reports 0 inset in landscape */
+body.standalone #app{padding-top:calc(2.6vh + max(env(safe-area-inset-top), 28px))}
+@media (orientation:portrait){body.standalone #app{padding-top:calc(2vh + max(env(safe-area-inset-top), 28px))}}
 .col{display:flex;flex-direction:column;gap:2vh;min-height:0;overflow:hidden}
 #clock,#tiles{flex:0 0 auto}
 .card{background:var(--glass);border:1px solid var(--line);border-radius:2.2vw;-webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);box-shadow:0 1.2vh 4vh var(--shadow);transition:background .6s,border-color .6s,box-shadow .6s;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
@@ -154,6 +157,7 @@ body:not(.light) #mode button.on{color:#0a0f1e}
 </div>
 <div id="sheet"><div class="box" id="sheetbox"></div></div>
 <div id="mode"><button data-m="auto">Auto</button><button data-m="light">☀︎ Light</button><button data-m="dark">☾ Dark</button></div>
+<script>if(navigator.standalone||matchMedia('(display-mode: standalone)').matches)document.body.classList.add('standalone')</script>
 <script src="./vendor/ical.min.js"></script>
 <script>
 // ---- settings ----
