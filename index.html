@@ -308,7 +308,11 @@ window.FIT_DEBUG=/debug/.test(location.search);var fitT;function fitSoon(){clear
 window.addEventListener('resize',fitSoon);window.addEventListener('orientationchange',fitSoon);
 if(window.ResizeObserver){new ResizeObserver(fitSoon).observe(document.getElementById('wx'))}
 weather();setInterval(weather,15*60*1000);
-// reload nightly so the calendar embed never goes stale
+// self-update: compare the live page to the one we loaded; reload when it changes (and nightly at 4 AM)
+var PAGE_SRC=null;
+function fetchSelf(){return fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():null})}
+fetchSelf().then(function(t){PAGE_SRC=t});
+setInterval(function(){fetchSelf().then(function(t){if(t&&PAGE_SRC&&t!==PAGE_SRC&&!document.getElementById('sheet').classList.contains('open'))location.reload()})},10*60*1000);
 setInterval(function(){var h=new Date().getHours();if(h===4)location.reload()},60*60*1000);
 </script>
 </body>
