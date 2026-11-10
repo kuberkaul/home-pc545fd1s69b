@@ -26,25 +26,26 @@ body.light #stars{display:none}
 #stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:twinkle var(--d) ease-in-out infinite alternate}
 @keyframes twinkle{from{opacity:.15;transform:scale(.8)}to{opacity:.95;transform:scale(1.2)}}
 /* layout */
-#app{position:relative;z-index:1;height:100%;height:-webkit-fill-available;display:grid;grid-template-columns:minmax(0,46fr) minmax(0,54fr);grid-template-rows:minmax(0,1fr);gap:2.4vw;padding:2.6vh 3vw;padding-top:calc(2.6vh + env(safe-area-inset-top));padding-bottom:calc(1vh + 3.6vw + env(safe-area-inset-bottom));padding-left:calc(3vw + env(safe-area-inset-left));padding-right:calc(3vw + env(safe-area-inset-right));overflow:hidden}
+#app{position:relative;z-index:1;height:100%;height:-webkit-fill-available;display:grid;grid-template-columns:minmax(0,46fr) minmax(0,54fr);grid-template-rows:minmax(0,1fr);gap:2.4vw;padding:2.6vh 3vw;padding-top:calc(2.6vh + env(safe-area-inset-top));padding-bottom:calc(2vh + env(safe-area-inset-bottom));padding-left:calc(3vw + env(safe-area-inset-left));padding-right:calc(3vw + env(safe-area-inset-right));overflow:hidden}
 body{height:-webkit-fill-available}
 /* Home Screen web app: iPadOS draws its status bar over the page and reports 0 inset in landscape */
 body.standalone #app{padding-top:calc(2.6vh + max(env(safe-area-inset-top), 28px))}
 @media (orientation:portrait){body.standalone #app{padding-top:calc(2vh + max(env(safe-area-inset-top), 28px))}}
 .col{display:flex;flex-direction:column;gap:2vh;min-height:0;overflow:hidden}
 #clock,#tiles{flex:0 0 auto}
+#app>.col:last-child{padding-bottom:5.4vw}
 .card{background:var(--glass);border:1px solid var(--line);border-radius:2.2vw;-webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);box-shadow:0 1.2vh 4vh var(--shadow);transition:background .6s,border-color .6s,box-shadow .6s;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
 .card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.24s}
 @keyframes rise{from{opacity:0;transform:translateY(3vh)}to{opacity:1;transform:none}}
 /* clock */
-#clock{padding:2.2vh 2.6vw 2vh}
-.greet{font-size:1.8vw;color:var(--muted);letter-spacing:.02em}
-.time{font-size:8.6vw;font-weight:200;letter-spacing:-.04em;line-height:1;margin:.6vh 0 0;font-variant-numeric:tabular-nums;display:flex;align-items:flex-end}
+#clock{padding:1.6vh 2.4vw 1.5vh}
+.greet{font-size:1.5vw;color:var(--muted);letter-spacing:.02em}
+.time{font-size:6.4vw;font-weight:200;letter-spacing:-.04em;line-height:1;margin:.6vh 0 0;font-variant-numeric:tabular-nums;display:flex;align-items:flex-end}
 .time .side{display:flex;flex-direction:column;justify-content:flex-end;margin-left:1.1vw;padding-bottom:.7vw;letter-spacing:0;font-weight:400}
-.time .ss{font-size:2.4vw;color:var(--fg);opacity:.85;line-height:1}
-.time .ampm{font-size:1.6vw;color:var(--muted);margin-top:.5vh;line-height:1}
+.time .ss{font-size:1.9vw;color:var(--fg);opacity:.85;line-height:1}
+.time .ampm{font-size:1.3vw;color:var(--muted);margin-top:.5vh;line-height:1}
 .time .colon{transition:opacity .35s}
-.date{font-size:1.7vw;color:var(--muted);margin-top:.6vh}
+.date{font-size:1.45vw;color:var(--muted);margin-top:.4vh}
 /* weather */
 #wx{padding:2vh 2.4vw;flex:1 1 0;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
 .wxin{--wxs:1;font-size:calc(1.25vw * var(--wxs));display:flex;flex-direction:column}
@@ -56,26 +57,27 @@ body.standalone #app{padding-top:calc(2.6vh + max(env(safe-area-inset-top), 28px
 .wx-days{display:flex;justify-content:space-between;margin-top:1.6em;padding-top:1.3em;border-top:1px solid var(--line)}
 .day{text-align:center;font-size:1.65em;color:var(--muted)}.day .i{font-size:1.9em;margin:.2em 0}.day .hi{color:var(--fg);font-weight:600}.day .lo{margin-left:.3em}
 /* bart */
-#bart{padding:1.6vh 2.4vw 1.4vh;flex:0 0 auto}
+#bart{padding:1.9vh 2.4vw 1.7vh;flex:0 0 auto}
 #bart .bh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.8vh}
-#bart .bh b{font-size:1.5vw;font-weight:600}#bart .bh span{font-size:1.1vw;color:var(--muted)}
-#bart .dirs{display:grid;grid-template-columns:1fr 1fr;gap:1.6vw}
-#bart .dir h4{margin:0 0 .5vh;font-size:1.05vw;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-#bart .row{display:flex;align-items:center;gap:.6vw;font-size:1.25vw;line-height:1.3;padding:.25vh 0}
-#bart .row i{flex:0 0 .7vw;height:.7vw;border-radius:50%;background:var(--lc)}
-#bart .row .dest{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#bart .row .mins{font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+#bart .bh b{font-size:1.75vw;font-weight:600}#bart .bh span{font-size:1.2vw;color:var(--muted)}
+#bart .dirs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2vw}
+#bart .dir{min-width:0}
+#bart .dir h4{margin:0 0 .7vh;font-size:1.15vw;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#bart .row{display:flex;align-items:center;gap:.6vw;font-size:1.45vw;line-height:1.35;padding:.35vh 0}
+#bart .row i{flex:0 0 .85vw;height:.85vw;border-radius:50%;background:var(--lc)}
+#bart .row .dest{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#bart .row .mins{flex:0 0 auto;font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
 #bart .row .mins b{color:var(--fg);font-weight:600}
 #bart .none{font-size:1.1vw;color:var(--muted)}
 @media (orientation:portrait){#bart{grid-column:1/-1}#bart .bh b{font-size:2.2vw}#bart .bh span{font-size:1.6vw}#bart .dir h4{font-size:1.5vw}#bart .row{font-size:1.8vw}#bart .row i{flex-basis:1vw;height:1vw}#bart .none{font-size:1.6vw}}
 /* tiles */
 #tiles{display:grid;grid-template-columns:1fr 1fr;gap:2vh}
-.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:.4vh;padding:2.2vh 2vw;min-height:12vh;border-radius:2.2vw;color:#fff;text-decoration:none;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 1.2vh 3vh rgba(0,0,0,.3);transition:transform .25s,box-shadow .25s;animation:rise .9s .36s cubic-bezier(.2,.8,.2,1) both}
+.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:.3vh;padding:1.5vh 1.8vw;min-height:7.5vh;border-radius:2.2vw;color:#fff;text-decoration:none;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 1.2vh 3vh rgba(0,0,0,.3);transition:transform .25s,box-shadow .25s;animation:rise .9s .36s cubic-bezier(.2,.8,.2,1) both}
 .tile:active{transform:scale(.96)}
 .tile::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 45%);animation:sheen 9s linear infinite}
 @keyframes sheen{to{transform:rotate(360deg)}}
-.tile svg{width:4.2vw;height:4.2vw;fill:#fff;filter:drop-shadow(0 .4vh 1vh rgba(0,0,0,.35))}
-.tile .t{font-size:2vw;font-weight:600;letter-spacing:.01em}.tile .s{font-size:1.3vw;opacity:.8}
+.tile svg{width:3.2vw;height:3.2vw;fill:#fff;filter:drop-shadow(0 .4vh 1vh rgba(0,0,0,.35))}
+.tile .t{font-size:1.65vw;font-weight:600;letter-spacing:.01em}.tile .s{font-size:1.1vw;opacity:.8}
 #yt{background:linear-gradient(135deg,#ff3d3d,#b3001b)}#ym{background:linear-gradient(135deg,#ff6a3d,#8e1a3a)}
 /* calendar */
 #cal{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column}
@@ -124,7 +126,8 @@ body.light #sheet .close{color:#fff}
  #app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:2vh;padding:2vh 4vw;padding-top:calc(2vh + env(safe-area-inset-top));padding-bottom:calc(1vh + 5.6vw + env(safe-area-inset-bottom))}
  .col:first-child{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:2vh}
  #clock{grid-column:1}#wx{grid-column:2;grid-row:1}#tiles,#bart{grid-column:1/-1}
- .time{font-size:10vw}.greet,.date{font-size:2.5vw}.time .ss{font-size:3vw}.time .ampm{font-size:2.2vw}
+ .time{font-size:8.4vw}.greet,.date{font-size:2.2vw}.time .ss{font-size:2.6vw}.time .ampm{font-size:1.9vw}
+ #app>.col:last-child{padding-bottom:0}
  .wxin{font-size:calc(1.6vw * var(--wxs))}
  .tile{min-height:11vh}.tile .t{font-size:2.8vw}.tile .s{font-size:1.8vw}.tile svg{width:5.5vw;height:5.5vw}
  #cal .hd b{font-size:2.8vw}#cal .hd span{font-size:1.9vw}
@@ -133,7 +136,7 @@ body.light #sheet .close{color:#fff}
 .dim #app{filter:brightness(.72)}
 body.light .orb{opacity:.7;mix-blend-mode:normal}
 /* mode toggle */
-#mode{position:fixed;right:calc(3vw + env(safe-area-inset-right));bottom:calc(.6vh + env(safe-area-inset-bottom));z-index:5;display:flex;gap:.2vw;padding:.3vw;border-radius:3vw;background:var(--glass);border:1px solid var(--line);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);opacity:.55;transition:opacity .3s}
+#mode{position:fixed;right:calc(3vw + env(safe-area-inset-right));bottom:calc(1.4vh + env(safe-area-inset-bottom));z-index:5;display:flex;gap:.2vw;padding:.3vw;border-radius:3vw;background:var(--glass);border:1px solid var(--line);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);opacity:.55;transition:opacity .3s}
 #mode:hover,#mode:active{opacity:1}
 #mode button{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--fg);font:inherit;font-size:1.1vw;padding:.5vw 1vw;border-radius:3vw;opacity:.6;cursor:pointer}
 #mode button.on{background:var(--fg);color:#fff;opacity:1}
@@ -152,7 +155,6 @@ body:not(.light) #mode button.on{color:#0a0f1e}
       <div class="date" id="date"></div>
     </div>
     <div class="card" id="wx"><div class="wxin"><div class="wx-desc" style="color:var(--muted)">Loading weather…</div></div></div>
-    <div class="card" id="bart"><div class="bh"><b>BART · Civic Center</b><span id="bart-upd">loading…</span></div><div class="dirs" id="bart-dirs"></div></div>
     <div id="tiles">
       <a class="tile" id="yt" href="https://www.youtube.com/?app=desktop" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
@@ -161,6 +163,7 @@ body:not(.light) #mode button.on{color:#0a0f1e}
         <svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm0 4.8a7.2 7.2 0 1 1 0 14.4 7.2 7.2 0 0 1 0-14.4zm0 1.6a5.6 5.6 0 1 0 0 11.2 5.6 5.6 0 0 0 0-11.2zM9.8 8.6l5.8 3.4-5.8 3.4V8.6z"/></svg>
         <div class="t">YouTube Music</div><div class="s">Play music</div></a>
     </div>
+    <div class="card" id="bart"><div class="bh"><b>BART · Civic Center</b><span id="bart-upd">loading…</span></div><div class="dirs" id="bart-dirs"></div></div>
   </div>
   <div class="col">
     <div class="card" id="cal">
@@ -171,7 +174,8 @@ body:not(.light) #mode button.on{color:#0a0f1e}
 </div>
 <div id="sheet"><div class="box" id="sheetbox"></div></div>
 <div id="mode"><button data-m="auto">Auto</button><button data-m="light">☀︎ Light</button><button data-m="dark">☾ Dark</button></div>
-<script>if(navigator.standalone||matchMedia('(display-mode: standalone)').matches)document.body.classList.add('standalone')</script>
+<script>if(navigator.standalone||matchMedia('(display-mode: standalone)').matches||/standalone/.test(location.search))document.body.classList.add('standalone')</script>
+<script>(function(){var m=location.search.match(/[?&]vh=(\d+)/);if(m){var h=m[1]+'px',st=document.createElement('style');st.textContent='html,body,#app{height:'+h+' !important;min-height:'+h+'}';document.head.appendChild(st)}})()</script>
 <script src="./vendor/ical.min.js"></script>
 <script>
 // ---- settings ----
@@ -309,10 +313,10 @@ function bart(){
    dirs[dir].push({dest:e.destination,color:LINE[(est[0].color||'').toUpperCase()]||'#aaa',mins:mins,first:Math.min.apply(null,mins)})});
   function col(title,list){list.sort(function(a,b){return a.first-b.first});var h='<div class="dir"><h4>'+title+'</h4>';
    if(!list.length)h+='<div class="none">No trains</div>';
-   list.slice(0,3).forEach(function(d){h+='<div class="row" style="--lc:'+d.color+'"><i></i><span class="dest">'+esc(d.dest)+'</span><span class="mins">'+d.mins.map(function(m,i){return (i===0?'<b>':'')+(m===0?'Now':m)+(i===0?'</b>':'')}).join(' · ')+'<span style="opacity:.6"> min</span></span></div>'});
+   list.slice(0,3).forEach(function(d){h+='<div class="row" style="--lc:'+d.color+'"><i></i><span class="dest">'+esc(d.dest)+'</span><span class="mins">'+d.mins.map(function(m,i){return (i===0?'<b>':'')+(m===0?'Now':m)+(i===0?'</b>':'')}).join(' · ')+'</span></div>'});
    return h+'</div>'}
-  document.getElementById('bart-dirs').innerHTML=col('East Bay · North',dirs.North)+col('Daly City · SFO · South',dirs.South);
-  document.getElementById('bart-upd').textContent='updated '+(j.root.time||'').replace(/:\d\d (AM|PM) \w+$/,' $1').toLowerCase();
+  document.getElementById('bart-dirs').innerHTML=col('Northbound',dirs.North)+col('Southbound',dirs.South);
+  document.getElementById('bart-upd').textContent='minutes · updated '+(j.root.time||'').replace(/:\d\d (AM|PM) \w+$/,' $1').toLowerCase();
   fitSoon();
  }).catch(function(){document.getElementById('bart-dirs').innerHTML='<div class="none">BART data unavailable</div>';document.getElementById('bart-upd').textContent=''});
 }
