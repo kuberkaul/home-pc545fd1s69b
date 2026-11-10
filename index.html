@@ -205,7 +205,8 @@ function parseFeed(txt,cal,from,to,out){
 function loadCal(){
  var from=new Date();from.setDate(from.getDate()-1);var to=new Date();to.setDate(to.getDate()+8);
  fetch(CAL_INDEX+'?t='+Date.now()).then(function(r){return r.json()}).then(function(cals){
-  document.getElementById('legend').innerHTML=cals.length>1?cals.map(function(c){return '<span style="--c:'+c.color+'"><i></i>'+esc(c.name)+'</span>'}).join(''):'';
+  var seen={},uniq=cals.filter(function(c){if(seen[c.name])return false;seen[c.name]=1;return true});
+  document.getElementById('legend').innerHTML=uniq.length>1?uniq.map(function(c){return '<span style="--c:'+c.color+'"><i></i>'+esc(c.name)+'</span>'}).join(''):'';
   return Promise.all(cals.map(function(c){return fetch('./calendars/'+c.file+'?t='+Date.now()).then(function(r){return r.text()}).then(function(t){return {cal:c,txt:t}}).catch(function(){return null})}))
  }).then(function(feeds){
   var out=[]; feeds.forEach(function(f){ if(!f) return; try{parseFeed(f.txt,f.cal,from,to,out)}catch(e){console.warn('bad feed',f.cal.name,e)} });
