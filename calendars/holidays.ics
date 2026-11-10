@@ -12,7 +12,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-01-01US415regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:New Year's Day is a public holiday in all countries that observe the Gregorian calendar, with the exception of Israel\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/international-new-years-day
 DTSTART;VALUE=DATE:20260101
 DTEND;VALUE=DATE:20260102
@@ -35,7 +34,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-01-02US-LA1027regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Some countries observe a second public holiday for New Year's celebration\n\nLouisiana\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/louisiana/day-after-new-years-day
 DTSTART;VALUE=DATE:20260102
 DTEND;VALUE=DATE:20260103
@@ -58,7 +56,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-01-19US536regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Each year on the third Monday of January, America honors the birth, life and dream of Dr. Martin Luther King, Jr.\n\n3rd Monday in January\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/martin-luther-king-jr-day
 DTSTART;VALUE=DATE:20260119
 DTEND;VALUE=DATE:20260120
@@ -81,7 +78,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-02-16US686regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:The original version of the holiday was in commemoration of George Washington's birthday.\n\n3rd Monday in February\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/presidents-day
 DTSTART;VALUE=DATE:20260216
 DTEND;VALUE=DATE:20260217
@@ -104,7 +100,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-02-16US686regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:The original version of the holiday was in commemoration of George Washington's birthday.\n\n3rd Monday in February\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/presidents-day
 DTSTART;VALUE=DATE:20260216
 DTEND;VALUE=DATE:20260217
@@ -127,7 +122,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-02-16US-LA156regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:The Carnival is an annual festival held in several countries in Latin America and the Caribbean in the days before Ash Wednesday\n\nLouisiana\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/louisiana/carnival-monday
 DTSTART;VALUE=DATE:20260216
 DTEND;VALUE=DATE:20260217
@@ -150,7 +144,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-05-25US548regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Memorial Day is a day of remembrance for those who have died in military service for the United States\n\nLast Monday in May\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/memorial-day
 DTSTART;VALUE=DATE:20260525
 DTEND;VALUE=DATE:20260526
@@ -173,7 +166,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-06-15US-UT445regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Juneteenth is a federal holiday and state holiday in several states. It commemorates the date in 1865 when news of the emancipation of African American slaves reached Galveston\n\nEmancipation Day\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/utah/juneteenth
 DTSTART;VALUE=DATE:20260615
 DTEND;VALUE=DATE:20260616
@@ -196,7 +188,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-06-19US445lieuregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Juneteenth is a federal holiday and state holiday in several states. It commemorates the date in 1865 when news of the emancipation of African American slaves reached Galveston\n\nEmancipation Day\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/juneteenth
 DTSTART;VALUE=DATE:20260619
 DTEND;VALUE=DATE:20260620
@@ -219,7 +210,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-06-19US445regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Juneteenth is a federal holiday and state holiday in several states. It commemorates the date in 1865 when news of the emancipation of African American slaves reached Galveston\n\nEmancipation Day\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/juneteenth
 DTSTART;VALUE=DATE:20260619
 DTEND;VALUE=DATE:20260620
@@ -242,7 +232,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-06-19US445regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Juneteenth is a federal holiday and state holiday in several states. It commemorates the date in 1865 when news of the emancipation of African American slaves reached Galveston\n\nEmancipation Day\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/juneteenth
 DTSTART;VALUE=DATE:20260619
 DTEND;VALUE=DATE:20260620
@@ -265,7 +254,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-07-03US895lieucountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:On July 4th 1776 the United States of America proclaimed its independence from England\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/usa-independence-day
 DTSTART;VALUE=DATE:20260703
 DTEND;VALUE=DATE:20260704
@@ -288,7 +276,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-07-04US895regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:On July 4th 1776 the United States of America proclaimed its independence from England\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/usa-independence-day
 DTSTART;VALUE=DATE:20260704
 DTEND;VALUE=DATE:20260705
@@ -311,7 +298,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-09-07US474regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:This holiday is most commonly associated with a commemoration of the achievements of the labor movement\n\n1st Monday in September\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/labor-day
 DTSTART;VALUE=DATE:20260907
 DTEND;VALUE=DATE:20260908
@@ -334,7 +320,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-10-12US190regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:This national holiday commemorates the exact date when Christopher Columbus first set foot in the Americas\n\n2nd Monday in October\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/columbus-day
 DTSTART;VALUE=DATE:20261012
 DTEND;VALUE=DATE:20261013
@@ -357,7 +342,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-10-12US190regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:This national holiday commemorates the exact date when Christopher Columbus first set foot in the Americas\n\n2nd Monday in October\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/columbus-day
 DTSTART;VALUE=DATE:20261012
 DTEND;VALUE=DATE:20261013
@@ -380,7 +364,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-10-12US3334regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:This state holiday has been adopted on the second Monday in October to replace Columbus Day\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/us-indigenous-peoples-day
 DTSTART;VALUE=DATE:20261012
 DTEND;VALUE=DATE:20261013
@@ -403,7 +386,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-11-11US907regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Observed on November 11th to recall the end of World War I on that date in 1918\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/veterans-day
 DTSTART;VALUE=DATE:20261111
 DTEND;VALUE=DATE:20261112
@@ -426,7 +408,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-11-11US907regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Observed on November 11th to recall the end of World War I on that date in 1918\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/veterans-day
 DTSTART;VALUE=DATE:20261111
 DTEND;VALUE=DATE:20261112
@@ -449,7 +430,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-11-26US842regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Fourth Thursday in November. Traditionally, this holiday celebrates the giving of thanks for the autumn harvest\n\n4th Thursday in November\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/thanksgiving
 DTSTART;VALUE=DATE:20261126
 DTEND;VALUE=DATE:20261127
@@ -472,7 +452,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-11-27US216regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Whilst it is not an official holiday, the Day after Thanksgiving is given an a holiday by most employers\n\nDay after 4th Thursday in November\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/day-after-thanksgiving
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
@@ -495,7 +474,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2026-12-25US181regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Christmas celebrates the Nativity of Jesus which according to tradition took place on December 25th 1 BC\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/christmas-day
 DTSTART;VALUE=DATE:20261225
 DTEND;VALUE=DATE:20261226
@@ -518,7 +496,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-01-01US415regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:New Year's Day is a public holiday in all countries that observe the Gregorian calendar, with the exception of Israel\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/international-new-years-day
 DTSTART;VALUE=DATE:20270101
 DTEND;VALUE=DATE:20270102
@@ -541,7 +518,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-01-18US536regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Each year on the third Monday of January, America honors the birth, life and dream of Dr. Martin Luther King, Jr.\n\n3rd Monday in January\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/martin-luther-king-jr-day
 DTSTART;VALUE=DATE:20270118
 DTEND;VALUE=DATE:20270119
@@ -564,7 +540,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-02-15US686regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:The original version of the holiday was in commemoration of George Washington's birthday.\n\n3rd Monday in February\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/presidents-day
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270216
@@ -587,7 +562,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-02-15US686regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:The original version of the holiday was in commemoration of George Washington's birthday.\n\n3rd Monday in February\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/presidents-day
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270216
@@ -610,7 +584,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-05-31US548regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Memorial Day is a day of remembrance for those who have died in military service for the United States\n\nLast Monday in May\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/memorial-day
 DTSTART;VALUE=DATE:20270531
 DTEND;VALUE=DATE:20270601
@@ -633,7 +606,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-06-19US445lieuregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Juneteenth is a federal holiday and state holiday in several states. It commemorates the date in 1865 when news of the emancipation of African American slaves reached Galveston\n\nEmancipation Day\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/juneteenth
 DTSTART;VALUE=DATE:20270619
 DTEND;VALUE=DATE:20270620
@@ -656,7 +628,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-06-19US445regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Juneteenth is a federal holiday and state holiday in several states. It commemorates the date in 1865 when news of the emancipation of African American slaves reached Galveston\n\nEmancipation Day\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/juneteenth
 DTSTART;VALUE=DATE:20270619
 DTEND;VALUE=DATE:20270620
@@ -679,7 +650,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-06-19US445regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Juneteenth is a federal holiday and state holiday in several states. It commemorates the date in 1865 when news of the emancipation of African American slaves reached Galveston\n\nEmancipation Day\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/juneteenth
 DTSTART;VALUE=DATE:20270619
 DTEND;VALUE=DATE:20270620
@@ -702,7 +672,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-06-21US-UT445regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Juneteenth is a federal holiday and state holiday in several states. It commemorates the date in 1865 when news of the emancipation of African American slaves reached Galveston\n\nEmancipation Day\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/utah/juneteenth
 DTSTART;VALUE=DATE:20270621
 DTEND;VALUE=DATE:20270622
@@ -725,7 +694,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-07-04US895regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:On July 4th 1776 the United States of America proclaimed its independence from England\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/usa-independence-day
 DTSTART;VALUE=DATE:20270704
 DTEND;VALUE=DATE:20270705
@@ -748,7 +716,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-07-05US895lieucountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:On July 4th 1776 the United States of America proclaimed its independence from England\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/usa-independence-day
 DTSTART;VALUE=DATE:20270705
 DTEND;VALUE=DATE:20270706
@@ -771,7 +738,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-09-06US474regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:This holiday is most commonly associated with a commemoration of the achievements of the labor movement\n\n1st Monday in September\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/labor-day
 DTSTART;VALUE=DATE:20270906
 DTEND;VALUE=DATE:20270907
@@ -794,7 +760,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-09-24US-CA3950regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:A paid state holiday in California to celebrate the diversity of California’s Native American communities.\n\nCalifornia\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/california/native-american-day
 DTSTART;VALUE=DATE:20270924
 DTEND;VALUE=DATE:20270925
@@ -817,7 +782,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-10-11US190regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:This national holiday commemorates the exact date when Christopher Columbus first set foot in the Americas\n\n2nd Monday in October\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/columbus-day
 DTSTART;VALUE=DATE:20271011
 DTEND;VALUE=DATE:20271012
@@ -840,7 +804,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-10-11US190regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:This national holiday commemorates the exact date when Christopher Columbus first set foot in the Americas\n\n2nd Monday in October\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/columbus-day
 DTSTART;VALUE=DATE:20271011
 DTEND;VALUE=DATE:20271012
@@ -863,7 +826,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-10-11US3334regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:This state holiday has been adopted on the second Monday in October to replace Columbus Day\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/us-indigenous-peoples-day
 DTSTART;VALUE=DATE:20271011
 DTEND;VALUE=DATE:20271012
@@ -886,7 +848,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-11-11US907regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Observed on November 11th to recall the end of World War I on that date in 1918\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/veterans-day
 DTSTART;VALUE=DATE:20271111
 DTEND;VALUE=DATE:20271112
@@ -909,7 +870,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-11-11US907regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Observed on November 11th to recall the end of World War I on that date in 1918\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/veterans-day
 DTSTART;VALUE=DATE:20271111
 DTEND;VALUE=DATE:20271112
@@ -932,7 +892,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-11-25US842regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Fourth Thursday in November. Traditionally, this holiday celebrates the giving of thanks for the autumn harvest\n\n4th Thursday in November\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/thanksgiving
 DTSTART;VALUE=DATE:20271125
 DTEND;VALUE=DATE:20271126
@@ -955,7 +914,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-11-26US216regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Whilst it is not an official holiday, the Day after Thanksgiving is given an a holiday by most employers\n\nDay after 4th Thursday in November\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/day-after-thanksgiving
 DTSTART;VALUE=DATE:20271126
 DTEND;VALUE=DATE:20271127
@@ -978,7 +936,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2027-12-25US181regcountry@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:Christmas celebrates the Nativity of Jesus which according to tradition took place on December 25th 1 BC\n\n\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/christmas-day
 DTSTART;VALUE=DATE:20271225
 DTEND;VALUE=DATE:20271226
@@ -1001,7 +958,6 @@ BEGIN:VEVENT
 CLASS:PUBLIC
 UID:2028-09-22US-CA3950regregion@www.officeholidays.com
 CREATED:20261105T080000Z
-DESCRIPTION:A paid state holiday in California to celebrate the diversity of California’s Native American communities.\n\nCalifornia\n\nInformation provided by www.officeholidays.com
 URL:https://www.officeholidays.com/holidays/usa/california/native-american-day
 DTSTART;VALUE=DATE:20280922
 DTEND;VALUE=DATE:20280923

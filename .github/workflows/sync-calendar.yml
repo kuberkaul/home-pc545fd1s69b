@@ -25,7 +25,8 @@ jobs:
             slug="$(echo "$name" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/^-//;s/-$//')"
             https="${url/webcal:\/\//https://}"
             if curl -sfL --max-time 60 -A "Mozilla/5.0 (calendar-sync)" "$https" -o /tmp/feed.ics && grep -q "BEGIN:VCALENDAR" /tmp/feed.ics; then
-              sed '/^DTSTAMP:/d' /tmp/feed.ics > "calendars/$slug.ics"
+              # drop DTSTAMP (noise) and DESCRIPTION / X-ALT-DESC (notes) including their folded continuation lines; keep LOCATION
+              awk 'BEGIN{skip=0} /^(DESCRIPTION|X-ALT-DESC)[:;]/{skip=1;next} /^[ \t]/{if(skip)next} {skip=0} !/^DTSTAMP:/{print}' /tmp/feed.ics > "calendars/$slug.ics"
               [ $first = 1 ] || echo "," >> calendars/index.json; first=0
               printf '  {"name": "%s", "color": "%s", "file": "%s.ics"}' "$name" "$color" "$slug" >> calendars/index.json
               echo "ok: $name -> $slug.ics ($(grep -c BEGIN:VEVENT calendars/$slug.ics) events)"
