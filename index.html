@@ -134,6 +134,12 @@ body.light #sheet .close{color:#fff}
  .dcol .dn{font-size:1.7vw}.dcol .dd{font-size:3.6vw}.ev{font-size:1.65vw}.ev .et{font-size:1.35vw}.more,.empty{font-size:1.5vw}
 }
 .dim #app{filter:brightness(.72)}
+/* night screen: near-black with a dim clock; backlight follows auto-brightness in a dark room */
+#night{position:fixed;inset:0;z-index:20;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:0;pointer-events:none;transition:opacity 2s}
+#night.on{opacity:1;pointer-events:auto}
+#night .nt{font-size:14vw;font-weight:200;letter-spacing:-.04em;line-height:1;color:rgba(255,255,255,.22);font-variant-numeric:tabular-nums}
+#night .nd{font-size:2.2vw;color:rgba(255,255,255,.14);margin-top:1.5vh;letter-spacing:.06em}
+#night .nx{position:absolute;bottom:4vh;font-size:1.3vw;color:rgba(255,255,255,.1)}
 body.light .orb{opacity:.7;mix-blend-mode:normal}
 /* mode toggle */
 #mode{position:fixed;right:calc(3vw + env(safe-area-inset-right));bottom:calc(1.4vh + env(safe-area-inset-bottom));z-index:5;display:flex;gap:.2vw;padding:.3vw;border-radius:3vw;background:var(--glass);border:1px solid var(--line);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);opacity:.55;transition:opacity .3s}
@@ -172,6 +178,7 @@ body:not(.light) #mode button.on{color:#0a0f1e}
     </div>
   </div>
 </div>
+<div id="night"><div class="nt" id="ntime">--:--</div><div class="nd" id="ndate"></div><div class="nx">tap to wake</div></div>
 <div id="sheet"><div class="box" id="sheetbox"></div></div>
 <div id="mode"><button data-m="auto">Auto</button><button data-m="light">☀︎ Light</button><button data-m="dark">☾ Dark</button></div>
 <script>if(navigator.standalone||matchMedia('(display-mode: standalone)').matches||/standalone/.test(location.search))document.body.classList.add('standalone')</script>
@@ -182,7 +189,9 @@ body:not(.light) #mode button.on{color:#0a0f1e}
 var CAL_INDEX='./calendars/index.json'; // feeds synced every 20 min by .github/workflows/sync-calendar.yml from the CAL_FEEDS secret
 var MAX_EVENTS=5; // per day before "+N more"
 var TZ='America/Los_Angeles', LAT=37.7749, LON=-122.4194;
-var DIM_FROM=22, DIM_TO=6; // dim screen between these hours
+var DIM_FROM=22, DIM_TO=6; // soften colors between these hours
+var NIGHT_FROM=23, NIGHT_TO=6; // near-black night screen between these hours; tap wakes it for a minute
+var awakeUntil=0;
 
 // ---- calendar (ICS file in this repo, rendered as a 7-day view) ----
 function ymd(d){return fmt(d,{year:'numeric',month:'2-digit',day:'2-digit'})} // local date key in TZ
@@ -284,6 +293,7 @@ function tick(){
  var d=new Date();
  var parts={};new Intl.DateTimeFormat('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(d).forEach(function(x){parts[x.type]=x.value});
  var h=+parts.hour%24, m=('0'+parts.minute).slice(-2), s=('0'+parts.second).slice(-2);
+ var fh=location.search.match(/[?&]hour=(\d+)/); if(fh) h=+fh[1]%24;
  var h12=((h+11)%12)+1;
  document.getElementById('hh').textContent=h12;document.getElementById('mm').textContent=m;
  document.getElementById('ss').textContent=s;
@@ -296,11 +306,15 @@ function tick(){
   document.getElementById('week').textContent=fmt(d,{month:'short',day:'numeric'})+' – '+fmt(wkEnd,{month:'short',day:'numeric'});
   var dim=(h>=DIM_FROM||h<DIM_TO);document.body.classList.toggle('dim',dim);
  }
+ var night=(h>=NIGHT_FROM||h<NIGHT_TO)&&Date.now()>awakeUntil;
+ document.getElementById('night').classList.toggle('on',night);
+ if(night){document.getElementById('ntime').textContent=h12+':'+m;document.getElementById('ndate').textContent=fmt(d,{weekday:'long',month:'long',day:'numeric'})}
  var p=palette(h+d.getMinutes()/60),r=document.documentElement.style;
  ['--c1','--c2','--c3','--o1','--o2','--o3'].forEach(function(v,i){r.setProperty(v,p[i])});
  document.getElementById('stars').style.opacity=(h>=20||h<6)?1:0;
 }
 (function stars(){var w=document.getElementById('stars'),f='';for(var i=0;i<90;i++)f+='<i style="left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--d:'+(2+Math.random()*4)+'s;animation-delay:-'+Math.random()*5+'s;width:'+(1+Math.random()*2)+'px;height:'+(1+Math.random()*2)+'px"></i>';w.innerHTML=f})();
+document.getElementById('night').addEventListener('click',function(){awakeUntil=Date.now()+60*1000;tick()});
 tick();setInterval(tick,1000);
 
 // ---- BART departures (public feed, no key needed beyond BART's published one) ----
